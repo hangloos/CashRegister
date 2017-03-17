@@ -80,7 +80,6 @@ function CashRegisterController() {
        alert("Your register is currently empty")
       } else {
         var register = JSON.parse(localStorage.register);
-
        //update counts and values based on entry in the que
        if (this.registerQue[0]) { 
               if (register.twenty.count >= this.registerQue[0])  {
@@ -130,6 +129,7 @@ function CashRegisterController() {
  
     //update storage with new register after removal
     localStorage.setItem('register',JSON.stringify(register))
+    // this que will always have the specific number in the right index. 
     vm.registerQue = [0,0,0,0,0];
     vm.total = getTotal();
   } 
@@ -137,7 +137,7 @@ function CashRegisterController() {
 
   function change(amount) {
     var bills = []
-    var register = JSON.parse(localStorage.register || '[]');
+    var register = JSON.parse(localStorage.register);
       //push all current bills into array
       if (register.twenty.count > 0)  {
         for(var i = 0; i < register.twenty.count;i++) {
@@ -171,21 +171,42 @@ function CashRegisterController() {
         //boolean variable if you have correct change or not
         var correctChange = false
 
-          bills.forEach(function(bill,index)  {
-            if (bill === amount) {
-              amount -= bill
-              checkBill(bill);
+          for(var j = 0; j < bills.length; j++) {
+            if (correctChange)  {
+              break
+            }
+              else if(bills[j] === amount) {
+              amount -= bills[j]
+              checkBill(bills[j], test_que);
               correctChange = true
-            } 
+              break
+            }
+
             //bills are set descending. Send lesser bills to a function to add to the que until bill === amount.
-            if (bill < amount && (amount - bill > 0)) {
-              amount -= bill
-              checkBill(bill);
+            if (bills[j] < amount && (amount - bills[j] > 0)) {
+              // testing amount and que for each attempt
+               var test_amount = amount
+               var test_que = [0,0,0,0,0]
+                test_amount -= bills[j]
+                checkBill(bills[j], test_que)
+                // found a lesser number, start an attemp to reach 0
+              for (var i = 0; i < bills.length; i++)  {
+                if (bills[i] === test_amount && i != j)  {
+                  checkBill(bills[i], test_que)
+                  correctChange = true
+                  break
+                } else if (bills[i] < test_amount && (test_amount - bills[i] > 0) && i != j)  {
+                  test_amount -= bills[i]
+                  checkBill(bills[i], test_que)
+                }
+              }
             } 
-          }) 
+          } 
 
           //check boolean
         if (correctChange)  {
+          debugger
+          vm.registerQue = test_que
           vm.remove();
         } else {
           alert("You don't have correct change")
@@ -193,25 +214,25 @@ function CashRegisterController() {
 
     }
 
-    function checkBill(bill)  {
+    function checkBill(bill, que)  {
       //based no bill value, set in correct place in que
         if (bill === 20)  {
-          vm.registerQue[0] += 1
+          que[0] += 1
         } 
         if (bill === 10)  {
-          vm.registerQue[1] += 1
+          que[1] += 1
         }
 
         if (bill === 5) {
-          vm.registerQue[2] += 1
+          que[2] += 1
         }
 
         if (bill === 2) {
-          vm.registerQue[3] += 1
+          que[3] += 1
         }
 
         if (bill ===1)  {
-          vm.registerQue[4] += 1
+          que[4] += 1
         }
     } 
 
