@@ -177,7 +177,7 @@ function CashRegisterController() {
             }
               else if(bills[j] === amount) {
               amount -= bills[j]
-              checkBill(bills[j], test_que);
+              checkBill(bills[j], vm.registerQue);
               correctChange = true
               break
             }
@@ -205,8 +205,9 @@ function CashRegisterController() {
 
           //check boolean
         if (correctChange)  {
-          debugger
+          if (test_que) {
           vm.registerQue = test_que
+          }
           vm.remove();
         } else {
           alert("You don't have correct change")
