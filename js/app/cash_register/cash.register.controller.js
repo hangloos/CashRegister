@@ -76,36 +76,63 @@ function CashRegisterController() {
   function remove() {
 
       //set register if you have one, otherwise you can't remove
-     if (localStorage.register === undefined)   {
-      alert("Your register is currently empty")
+      if (localStorage.register === undefined)   {
+       alert("Your register is currently empty")
       } else {
-      var register = JSON.parse(localStorage.register || '[]');
+        var register = JSON.parse(localStorage.register);
 
-      //update counts and values based on entry in the que
-      if (this.registerQue[0] && register.twenty.count > 0)  {
-        register.twenty.count -= this.registerQue[0]
-        register.twenty.value -= (this.registerQue[0] * 20)
-      } else if (this.registerQue[1] && register.ten.count > 0)  {
-        register.ten.count -= this.registerQue[1]
-        register.ten.value -= (this.registerQue[1] * 10)
-      } else if (this.registerQue[2] && register.five.count > 0)  {
-        register.five.count -= this.registerQue[2]
-        register.five.value -= (this.registerQue[2] * 5)
-      } else if (this.registerQue[3] && register.two.count > 0)  {
-        register.two.count -= this.registerQue[3]
-        register.two.value -= (this.registerQue[3] * 2)
-      } else if (this.registerQue[4] && register.one.count > 0)  {
-        register.one.count -= this.registerQue[4]
-        register.one.value -= (this.registerQue[4] * 1)
-      } else {
-            alert("You don't have this amount of this bill")
-      }
+       //update counts and values based on entry in the que
+       if (this.registerQue[0]) { 
+              if (register.twenty.count >= this.registerQue[0])  {
+                register.twenty.count -= this.registerQue[0]
+                register.twenty.value -= (this.registerQue[0] * 20)
+              } else  {
+                alert("You don't have enough twenties")
+              }
+        }
+
+        if (this.registerQue[1])  {
+            if (register.ten.count >= this.registerQue[1])  {
+                  register.ten.count -= this.registerQue[1]
+                  register.ten.value -= (this.registerQue[1] * 10)
+            } else {
+                alert("You don't have enough tens")
+              }
+        }
+
+        if (this.registerQue[2])  {
+            if (register.five.count >= this.registerQue[2]) {
+                  register.five.count -= this.registerQue[2]
+                  register.five.value -= (this.registerQue[2] * 5)              
+                } else  {
+                    alert("You don't have enough fives")
+                }
+        }
+
+        if (this.registerQue[3])  {
+            if (register.two.count >= this.registerQue[3])  {
+                register.two.count -= this.registerQue[3]
+                register.two.value -= (this.registerQue[3] * 2)              
+              } else  {
+                    alert("You don't have enough twos")
+              }
+        }
+
+
+        if (this.registerQue[4])  {
+            if (register.one.count >= this.registerQue[4])  {
+                register.one.count -= this.registerQue[4]
+                register.one.value -= (this.registerQue[4] * 1)
+            } else  {
+                alert("You don't have enough ones")
+            }
+        }
+ 
     //update storage with new register after removal
     localStorage.setItem('register',JSON.stringify(register))
     vm.registerQue = [0,0,0,0,0];
     vm.total = getTotal();
-  }
-
+  } 
   }
 
   function change(amount) {

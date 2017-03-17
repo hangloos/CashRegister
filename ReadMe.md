@@ -13,9 +13,9 @@ Cash Register
 
 
 ## Installation
-
+git clone repository
 run npm install
-
+brew install node
 npm run live
 
 
