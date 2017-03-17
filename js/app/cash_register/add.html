@@ -1,0 +1,19 @@
+<div class="ui bottom attached blue label">Cash Register: ${{vm.total}}</div>
+
+<form class="ui form" name="addAmount">
+  <div class="field">
+    <label>Amounts</label>
+    <label>$20s</label>
+    <input type="number" name="amount" ng-model="vm.registerQue[0]" placeholder="$20s">
+    <label>$10s</label>
+    <input type="number" name="amount" ng-model="vm.registerQue[1]" placeholder="$10s">
+    <label>$5s</label>
+    <input type="number" name="amount" ng-model="vm.registerQue[2]" placeholder="$5s">
+    <label>$2s</label>
+    <input type="number" name="amount" ng-model="vm.registerQue[3]" placeholder="$2s">
+    <label>$1s</label>
+    <input type="number" name="amount" ng-model="vm.registerQue[4]" placeholder="$1s">
+  </div>
+  <button class="ui button" ng-click="addAmount.$valid && vm.add()" type="submit">Submit</button>
+</form>
+

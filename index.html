@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cash Register</title>
+    <div class="ui three item menu">
+      <a class="item" ui-sref-active="active" ui-sref="home">Change Out</a>
+      <a class="item" ui-sref-active="active" ui-sref="add">Add</a>
+      <a class="item" ui-sref-active="active" ui-sref="remove">Remove</a>
+    </div>
+  </head>
+  <body ng-app="cashRegister">
+
+
+    <div ui-view></div>
+
+    <script src="./node_modules/angular/angular.js"></script>
+    <script src="./node_modules/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="./node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="./js/app/app.js"></script>
+    <script src="./js/app/cash_register/cash.register.controller.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="semantic/dist/semantic.min.js"></script>
+  </body>
+</html>

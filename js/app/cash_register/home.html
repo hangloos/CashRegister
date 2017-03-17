@@ -1,0 +1,11 @@
+<div class="ui bottom attached blue label">Cash Register: ${{vm.total}}</div>
+
+<h2>Change Out</h2>
+
+<form class="ui form" name="changeOut">
+  <div class="field">
+    <label>Change Amount</label>
+    <input type="number" ng-model="change" name="changeAmount" placeholder="Enter change amount">
+  </div>
+  <button class="ui button" ng-click="vm.change(change)" type="submit">Submit</button>
+</form>
