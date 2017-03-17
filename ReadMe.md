@@ -13,9 +13,7 @@ Cash Register
 
 
 ## Installation
-git clone repository
-run npm install
-npm run live
+git clone repository, npm install, npm run live
 
 
 ## Built With
